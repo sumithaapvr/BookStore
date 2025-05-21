@@ -6,6 +6,6 @@ services:
       context: ./demo
     image: sumithaapvr/book-app:${VERSION:-latest}
     ports:
-      - "3000:80"
+      - "3002:80"
     restart: unless-stopped
     container_name: my-book-app
