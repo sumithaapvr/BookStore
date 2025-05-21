@@ -43,8 +43,8 @@ pipeline {
                     echo "🚀 Deploying frontend container..."
 
                     sh '''
-                    docker rm -f frontend-container || true
-                    docker run -d --name frontend-container -p 4812:80 ${FRONTEND_IMAGE}:${VERSION}
+                    docker rm -f my-book-app || true
+                    docker run -d --name my-book-app -p 3000:80 ${FRONTEND_IMAGE}:${VERSION}
                     '''
                 }
             }
