@@ -2,8 +2,10 @@ version: '3.8'
 
 services:
   frontend:
-    build: .
+    build:
+      context: ./demo
+    image: sumithaapvr/book-app:${VERSION:-latest}
     ports:
-      - "3000:80"
+      - "4812:80"
+    restart: unless-stopped
     container_name: my-book-app
-    restart: always
