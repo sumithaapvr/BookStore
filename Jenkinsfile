@@ -37,18 +37,30 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+                stage('Deploy') {
             steps {
                 script {
                     echo "🚀 Deploying frontend container..."
 
                     sh '''
+                    echo "🔍 Checking for existing container on port 3002..."
+                    CONTAINER_ID=$(docker ps -q --filter "publish=3002")
+                    if [ ! -z "$CONTAINER_ID" ]; then
+                        echo "🛑 Stopping container using port 3002..."
+                        docker stop $CONTAINER_ID
+                        docker rm $CONTAINER_ID
+                    fi
+
+                    echo "🧽 Removing old container named 'my-book-app' if it exists..."
                     docker rm -f my-book-app || true
+
+                    echo "🚀 Running new container..."
                     docker run -d --name my-book-app -p 3002:80 ${FRONTEND_IMAGE}:${VERSION}
                     '''
                 }
             }
         }
+
 
         stage('Cleanup') {
             steps {
