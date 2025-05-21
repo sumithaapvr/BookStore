@@ -44,7 +44,7 @@ pipeline {
 
                     sh '''
                     docker rm -f my-book-app || true
-                    docker run -d --name my-book-app -p 3000:80 ${FRONTEND_IMAGE}:${VERSION}
+                    docker run -d --name my-book-app -p 3002:80 ${FRONTEND_IMAGE}:${VERSION}
                     '''
                 }
             }
